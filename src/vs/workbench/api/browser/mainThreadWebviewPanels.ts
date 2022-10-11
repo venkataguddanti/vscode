@@ -153,8 +153,12 @@ export class MainThreadWebviewPanels extends Disposable implements extHostProtoc
 
 		const extension = reviveWebviewExtension(extensionData);
 
+		// TODO: the origin can point to extension id if we had a flag in WebviewContentOptions to preserve the origin
+		const origin = extension?.id.value;
+
 		const webview = this._webviewWorkbenchService.openWebview({
 			id: handle,
+			origin,
 			providedViewType: viewType,
 			options: reviveWebviewOptions(initData.panelOptions),
 			contentOptions: reviveWebviewContentOptions(initData.webviewOptions),
